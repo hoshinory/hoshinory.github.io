@@ -3,8 +3,8 @@
 $ conda create -n virtual-python-name python=3.x
 ```
 ## 1.1 产生的原因: conda install package与pip install package位置不一致
-（1）conda install package 默认安装在根目录\~/.conda/site-packages下面
-（2）pip install package 默认安装在\~/conda/envs/virtual-python-name/lib/python3.x/site-packages
+（1）conda install package 默认安装在根目录~/.conda/site-packages下面
+（2）pip install package 默认安装在~/conda/envs/virtual-python-name/lib/python3.x/site-packages
 > ~表示安装conda的根目录
 >virtual-python-name 表示conda 创建的虚拟python环境的名称
 >python3.x 表示安装的python版本
@@ -14,7 +14,7 @@ $ conda create -n virtual-python-name python=3.x
 
 ## 1.3 解决方案
 需要修改配置项, 使得两种命令安装位置保持一致
-(1) 配置项位于一个\~/conda/envs/virtual-python-name/lib/python3.x/site.py
+(1) 配置项位于一个~/conda/envs/virtual-python-name/lib/python3.x/site.py
 site.py 头部的代码大概是下面这个样子
 ```python
 import sys 
@@ -49,18 +49,18 @@ USER_BASE = None
 LOCAL_CONDA_HOME="/home/user/hoshinory/conda"
 ## 设置安装的虚拟环境名称
 VIRTUAL_ENV_NAME="test"
-LIB_PATH="${LOCAL_CONDA_HOME}/envs/${VIRTUAL_ENV_NAME}/lib"
-PYTHON3="${LOCAL_CONDA_HOME}/envs/${VIRTUAL_ENV_NAME}/bin/python3"
+LIB_PATH="LOCALCONDAHOME/envs/{LOCAL_CONDA_HOME}/envs/{VIRTUAL_ENV_NAME}/lib"
+PYTHON3="LOCALCONDAHOME/envs/{LOCAL_CONDA_HOME}/envs/{VIRTUAL_ENV_NAME}/bin/python3"
 
 #先寻找python版本
 PYTHON_VERSION=`ls ${LIB_PATH} | grep python | grep -v "lib"`
 #然后就能拿到site.py
-SITE_FILE="${LIB_PATH}/${PYTHON_VERSION}/site.py"
+SITE_FILE="LIBPATH/{LIB_PATH}/{PYTHON_VERSION}/site.py"
 
 #需要替换的字符串
 string1="ENABLE_USER_SITE \\= True"
-string2="USER_SITE \\= ${LIB_PATH}/${PYTHON_VERSION}/site-packages"
-string3="USER_BASE \\= ${LIB_PATH}/${PYTHON_VERSION}"
+string2="USER_SITE \\= LIBPATH/{LIB_PATH}/{PYTHON_VERSION}/site-packages"
+string3="USER_BASE \\= LIBPATH/{LIB_PATH}/{PYTHON_VERSION}"
 #=====================================================================================================================#
 
 #拷贝SITE_FILE过来
@@ -70,9 +70,9 @@ num1=`cat site.py | grep -n "ENABLE_USER_SITE \\= " | head -n 1| awk -F":" '{pri
 sed -i "${num1}c ENABLE_USER_SITE \\= True" site.py
 
 num2=`cat site.py | grep -n "USER_SITE \\= " | grep -v "ENABLE_USER_SITE" | head -n 1| awk -F":" '{print $1}'`
-sed -i "${num2}c USER_SITE \\= '${LIB_PATH}/${PYTHON_VERSION}/site-packages'" site.py
+sed -i "num2cUSERSITE=′{num2}c USER_SITE \\= '{LIB_PATH}/${PYTHON_VERSION}/site-packages'" site.py
 num3=`cat site.py | grep -n "USER_BASE \\= " | head -n 1| awk -F":" '{print $1}'`
-sed -i "${num3}c USER_BASE \\= '${LIB_PATH}/${PYTHON_VERSION}'" site.py
+sed -i "num3cUSERBASE=′{num3}c USER_BASE \\= '{LIB_PATH}/${PYTHON_VERSION}'" site.py
 cp ./site.py ${SITE_FILE}
 rm -f ./site.py
 ```
