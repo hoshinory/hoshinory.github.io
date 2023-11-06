@@ -3,7 +3,7 @@
 $ conda create -n virtual-python-name python=3.x
 ```
 ## 1.1 产生的原因: conda install package与pip install package位置不一致
-（1）conda install package 默认安装在根目录~/.conda/site-packages下面
+（1）conda install package 默认安装在根目录~/.conda/site-packages下面 \
 （2）pip install package 默认安装在~/conda/envs/virtual-python-name/lib/python3.x/site-packages
 
 > ~表示安装conda的根目录
@@ -14,7 +14,7 @@ $ conda create -n virtual-python-name python=3.x
 因此在使用**pip install package**以后, 使用**conda list**找不到安装的对应包, 无法实现统一管理
 
 ## 1.3 解决方案
-需要修改配置项, 使得两种命令安装位置保持一致
+需要修改配置项, 使得两种命令安装位置保持一致 \
 (1) 配置项位于一个~/conda/envs/virtual-python-name/lib/python3.x/site.py
 site.py 头部的代码大概是下面这个样子
 ```python
