@@ -5,6 +5,7 @@ $ conda create -n virtual-python-name python=3.x
 ## 1.1 产生的原因: conda install package与pip install package位置不一致
 （1）conda install package 默认安装在根目录~/.conda/site-packages下面
 （2）pip install package 默认安装在~/conda/envs/virtual-python-name/lib/python3.x/site-packages
+
 > ~表示安装conda的根目录
 >virtual-python-name 表示conda 创建的虚拟python环境的名称
 >python3.x 表示安装的python版本
