@@ -1,21 +1,22 @@
 # 1. 一元线性回归
-给定数据$D=\{ (\boldsymbol{x_{1}}， y_{1}), (\boldsymbol{x_{2}}， y_{2})，...，(\boldsymbol{x_{m}}, y_{m})\}$，**考虑一元回归问题**：我们希望寻找到$f(x) = \boldsymbol{\omega}x + \boldsymbol{b}$ 这样一条直线，使得数据集$D$上的点到直线$f(x)$的距离之和的绝对值最小（$L_{1}$范数），即$min \sum_{i =1}^{m}|f(x_{i}) -y_{i}|$。
+给定数据D={(x1，y1),(x2，y2)，...，(xm,ym)}D=\{ (\boldsymbol{x_{1}}， y_{1}), (\boldsymbol{x_{2}}， y_{2})，...，(\boldsymbol{x_{m}}, y_{m})\}，**考虑一元回归问题**：我们希望寻找到f(x)=ωx+bf(x) = \boldsymbol{\omega}x + \boldsymbol{b} 这样一条直线，使得数据集DD上的点到直线f(x)f(x)的距离之和的绝对值最小（L1L_{1}范数），即min∑mi=1|f(xi)−yi|min \sum_{i =1}^{m}|f(x_{i}) -y_{i}|。
 ![线性回归](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9ob3NoaW5vcnkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE5LzEyLyVFNyVCQSVCRiVFNiU4MCVBNyVFNSU5QiU5RSVFNSVCRCU5Mi1zY2FsZWQucG5n?x-oss-process=image/format,png)
 ![尖点不可导](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9ob3NoaW5vcnkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE5LzEyLyVFNyVCQSVCRiVFNiU4MCVBNyVFNSU5QiU5RSVFNSVCRCU5Mi0lRTUlQjAlOTYlRTclODIlQjklRTQlQjglOEQlRTUlOEYlQUYlRTUlQUYlQkMtMS1zY2FsZWQucG5n?x-oss-process=image/format,png)
-由于函数$|f(x) -y_{i}|$存在尖点，不可导，因此采用$|f(x_{i}) -y_{i}|^{2}$来替代其原有的距离，因此，对于数据集$D$，我们希望最小拟合直线与数据点之间的距离，构造如下损失函数：
+由于函数|f(x)−yi||f(x) -y_{i}|存在尖点，不可导，因此采用|f(xi)−yi|2|f(x_{i}) -y_{i}|^{2}来替代其原有的距离，因此，对于数据集DD，我们希望最小拟合直线与数据点之间的距离，构造如下损失函数：
 
 ```math
     L = min \sum_{i=1}^{m} |f(x_{i}) -y_{i}|^{2} \Leftrightarrow min \sum_{i=1}^{m} (f(x_{i}) -y_{i})^{2} =  min \sum_{i=1}^{m} ( \boldsymbol{\omega}x_{i} + \boldsymbol{b} -y_{i})^{2}
 ```
+$$ L = min \sum_{i=1}^{m} |f(x_{i}) -y_{i}|^{2} \Leftrightarrow min \sum_{i=1}^{m} (f(x_{i}) -y_{i})^{2} =  min \sum_{i=1}^{m} ( \boldsymbol{\omega}x_{i} + \boldsymbol{b} -y_{i})^{2} $$
 
-为了方便数学运算，习惯上将损失函数$L$写作：
+为了方便数学运算，习惯上将损失函数LL写作：
 ```math
     L = min \ \frac{1}{2} \sum_{i=1}^{m} ( \boldsymbol{\omega}x_{i} + \boldsymbol{b} -y_{i})^{2} \\
 
     (\boldsymbol{\omega^{*}}，\boldsymbol{b^{*}})= \underset{\omega,b}{arg} \ min \ L= \underset{\omega,b}{arg} \ min \ \frac{1}{2} \sum_{i=1}^{m} ( \boldsymbol{\omega}x_{i} + \boldsymbol{b} -y_{i})^{2}
 ```
 
-我们从损失函数$L$中取出一项$(\boldsymbol{\omega}x_{i} + \boldsymbol{b} -y_{i})^{2}$，分别求其关于$\boldsymbol{\omega}$和$\boldsymbol{b}$的偏导，就有：
+我们从损失函数LL中取出一项(ωxi+b−yi)2(\boldsymbol{\omega}x_{i} + \boldsymbol{b} -y_{i})^{2}，分别求其关于ω\boldsymbol{\omega}和b\boldsymbol{b}的偏导，就有：
 ```math
     \frac{\partial (\boldsymbol{\omega}x_{i} + \boldsymbol{b} -y_{i})^{2}}{\partial \boldsymbol{\boldsymbol{\omega}}} = 2x_{i}( \boldsymbol{\omega}x_{i} + \boldsymbol{b} -y_{i})  \\
 
@@ -34,7 +35,7 @@
     \frac{\partial L}{\partial \boldsymbol{\omega}} = \boldsymbol{\omega}\sum_{i =1}^{m}x_{i}^{2}  + \boldsymbol{b}\sum_{i =1}^{m}x_{i} -\sum_{i =1}^{m}x_{i}y_{i}
 ```
 
-同样的，我们对$\boldsymbol{b}$求偏导就有：
+同样的，我们对b\boldsymbol{b}求偏导就有：
 ```math
 
     \frac{\partial L}{\partial \boldsymbol{b}} = \frac{1}{2} [ 2( \boldsymbol{\omega}x_{1} + \boldsymbol{b} -y_{1}) + 2( \boldsymbol{\omega}x_{2} + \boldsymbol{b} -y_{2}) +，...，+ 2( \boldsymbol{\omega}x_{m} + \boldsymbol{b} -y_{m})]
