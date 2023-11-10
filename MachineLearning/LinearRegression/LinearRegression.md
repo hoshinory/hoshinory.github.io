@@ -163,17 +163,23 @@
 ```
 
 对于矩阵相乘，有如下说明：
-$X_{m \times (n+1)}$，那么$X_{(n+1) \times m}^{T}$
-$\boldsymbol{\omega}_{(n+1) \times 1}$，那么$\boldsymbol{\omega}_{1 \times (n+1)}^{T}$
-$Y_{m \times 1}$，那么$Y_{1 \times m}^{T}$
+```math
+    X_{m \times (n+1)} \Rightarrow X_{(n+1) \times m}^{T} \\
+
+    \boldsymbol{\omega}_{(n+1) \times 1} \Rightarrow \boldsymbol{\omega}_{1 \times (n+1)}^{T} \\
+
+    Y_{m \times 1} \Rightarrow Y_{1 \times m}^{T}
+```
 
 因此，对于$\boldsymbol{\omega}^{T} X^{T} Y$ 和$Y^{T} X \boldsymbol{\omega}$就有：
+```math
+    \boldsymbol{\omega}_{1 \times (n+1)}^{T} X_{(n+1) \times m}^{T} Y_{m \times 1} = (\boldsymbol{\omega}^{T} X^{T} Y)_{1 \times 1} \\
 
-$\boldsymbol{\omega}_{1 \times (n+1)}^{T} X_{(n+1) \times m}^{T} Y_{m \times 1} = (\boldsymbol{\omega}^{T} X^{T} Y)_{1 \times 1}$，是一个标量（或者说一个数）
+    Y_{1 \times m}^{T} X_{m \times (n+1)} \boldsymbol{\omega}_{(n+1) \times 1} = (Y^{T} X \boldsymbol{\omega})_{1 \times 1} \\
 
-$Y_{1 \times m}^{T} X_{m \times (n+1)} \boldsymbol{\omega}_{(n+1) \times 1} = (Y^{T} X \boldsymbol{\omega})_{1 \times 1}$，也是一个标量（或者说一个数）
+    Y_{1 \times m}^{T}Y_{m \times 1} = (Y^{T}Y)_{1 \times 1}
+```
 
-同样的，$Y_{1 \times m}^{T}Y_{m \times 1} = (Y^{T}Y)_{1 \times 1}$，也是一个标量（或者说一个数）
 
 据此，就可以将$L$化简为如下：
 ```math
