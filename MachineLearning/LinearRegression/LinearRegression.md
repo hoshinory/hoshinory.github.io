@@ -7,7 +7,6 @@
 ```math
     L = min \sum_{i=1}^{m} |f(x_{i}) -y_{i}|^{2} \Leftrightarrow min \sum_{i=1}^{m} (f(x_{i}) -y_{i})^{2} =  min \sum_{i=1}^{m} ( \boldsymbol{\omega}x_{i} + \boldsymbol{b} -y_{i})^{2}
 ```
-$$ L = min \sum_{i=1}^{m} |f(x_{i}) -y_{i}|^{2} \Leftrightarrow min \sum_{i=1}^{m} (f(x_{i}) -y_{i})^{2} =  min \sum_{i=1}^{m} ( \boldsymbol{\omega}x_{i} + \boldsymbol{b} -y_{i})^{2} $$
 
 为了方便数学运算，习惯上将损失函数LL写作：
 ```math
