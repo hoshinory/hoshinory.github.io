@@ -335,12 +335,7 @@ target="_blank" rel="noopener" href="https://developer.nvidia.com/downloads/comp
 <li>问题: 安装完<code>Tensorrt</code>以后,
 <code>import tensorrt</code>找不到 <code>libnvinfer.so.8</code>文件</li>
 </ol>
-<div class="code-wrapper"><pre><code class="hljs python">&gt;&gt;<span class="hljs-keyword">import</span> tensorrt 
-Traceback (most recent call last):
-  File <span class="hljs-string">&quot;&lt;stdin&gt;&quot;</span>, line <span class="hljs-number">1</span>, <span class="hljs-keyword">in</span> &lt;module&gt;
-  File <span class="hljs-string">&quot;/home/hoshinory/conda/envs/onnx/lib/python3.8/site-packages/tensorrt/__init__.py&quot;</span>, line <span class="hljs-number">67</span>, <span class="hljs-keyword">in</span> &lt;module&gt;
-    <span class="hljs-keyword">from</span> .tensorrt <span class="hljs-keyword">import</span> *
-ImportError: libnvinfer.so<span class="hljs-number">.8</span>: cannot <span class="hljs-built_in">open</span> shared <span class="hljs-built_in">object</span> file: No such file <span class="hljs-keyword">or</span> directory</code></pre></div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;&gt;<span class="hljs-keyword">import</span> tensorrt <br>Traceback (most recent call last):<br>  File <span class="hljs-string">&quot;&lt;stdin&gt;&quot;</span>, line <span class="hljs-number">1</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>  File <span class="hljs-string">&quot;/home/hoshinory/conda/envs/onnx/lib/python3.8/site-packages/tensorrt/__init__.py&quot;</span>, line <span class="hljs-number">67</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    <span class="hljs-keyword">from</span> .tensorrt <span class="hljs-keyword">import</span> *<br>ImportError: libnvinfer.so<span class="hljs-number">.8</span>: cannot <span class="hljs-built_in">open</span> shared <span class="hljs-built_in">object</span> file: No such file <span class="hljs-keyword">or</span> directory<br></code></pre></td></tr></table></figure>
 <ol start="3" type="1">
 <li>解决办法:
 在环境变量(<code>~/.bashrc</code>)中导入<code>libnvinfer.so.8</code>的地址,
@@ -352,7 +347,7 @@ checked="" />找到<code>TensorRT-8.6.1.6.Linux.x86_64-gnu.cuda-12.0.tar.gz</cod
 比如我放在了<code>/usr/local/TensorRT-8.6.1.6</code>,
 在<code>.bashrc</code>中添加如下代码并<code>source ~/.bashrc</code>即可</label></li>
 </ul>
-<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> LD_LIBRARY_PATH=/usr/local/ensorRT-8.6.1.6/lib:<span class="hljs-variable">$LD_LIBRARY_PATH</span></code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> LD_LIBRARY_PATH=/usr/local/ensorRT-8.6.1.6/lib:<span class="hljs-variable">$LD_LIBRARY_PATH</span><br></code></pre></td></tr></table></figure>
 <ul class="task-list">
 <li><label><input type="checkbox"
 checked="" />使用<code>python -c</code>命令拿到<code>libnvinfer.so.8</code>的地址,
@@ -360,7 +355,7 @@ checked="" />使用<code>python -c</code>命令拿到<code>libnvinfer.so.8</code
 </ul>
 <p><code>python3 -c "import tensorrt; print(tensorrt.__path__)"</code>
 &gt;['/home/hoshinory/conda/envs/onnx/lib/python3.8/site-packages/tensorrt']</p>
-<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> LD_LIBRARY_PATH=/home/hoshinory/conda/envs/onnx/lib/python3.8/site-packages/tensorrt:<span class="hljs-variable">$LD_LIBRARY_PATH</span></code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> LD_LIBRARY_PATH=/home/hoshinory/conda/envs/onnx/lib/python3.8/site-packages/tensorrt:<span class="hljs-variable">$LD_LIBRARY_PATH</span><br></code></pre></td></tr></table></figure>
 <ol start="4" type="1">
 <li>一些坑</li>
 </ol>
